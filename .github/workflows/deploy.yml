@@ -18,7 +18,7 @@ jobs:
       - uses: docker/build-push-action@v4
         with:
           push: true
-          tags: your-dockerhub-username/my-flask-app:latest
+          tags: tags: vibu712/my-flask-app:latest
   deploy:
     name: Deploy to Kubernetes
     runs-on: ubuntu-latest
