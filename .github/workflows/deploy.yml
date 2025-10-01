@@ -26,8 +26,13 @@ jobs:
     needs: build-and-push
     steps:
       - uses: actions/checkout@v3
-      - uses: azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
-      - run: kubectl apply -f deployment.yaml
+
+      # --- NEW MANUAL METHOD ---
+      - name: Set up Kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
+      # --- END NEW METHOD ---
+
+      - name: Deploy to Kubernetes cluster
+        run: kubectl apply -f deployment.yaml
