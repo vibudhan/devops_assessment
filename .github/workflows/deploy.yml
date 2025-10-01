@@ -27,10 +27,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      # --- NEW STEP TO ADD ---
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+      # --- END NEW STEP ---
+
       - name: Set up Kubeconfig
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
-
+          
       - name: Deploy to Kubernetes cluster
         run: kubectl apply -f deployment.yaml
