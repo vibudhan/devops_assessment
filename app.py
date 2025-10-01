@@ -1,23 +1,15 @@
-# app.py
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
-# A secret key is needed to use flash messages
-app.secret_key = 'some_random_string_for_security'
+app.secret_key = 'your_random_secret_key' # Needed for flash messages
 
-@app.route('/user', methods=['GET', 'POST'])
-def user_page():
+@app.route('/', methods=['GET', 'POST'])
+def home():
     if request.method == 'POST':
-        # Get the name from the form
-        name = request.form['new_name']
-        
-        # Flash a success message
-        flash(f"Success! Name changed to {name}.", 'success')
-        
-        # Redirect back to the user page (as a GET request)
-        return redirect(url_for('user_page'))
+        name = request.form.get('name', 'Guest')
+        flash(f"Success! Name submitted: {name}", 'success')
+        return redirect(url_for('home'))
     
-    # This part only runs for GET requests
     return render_template('index.html')
 
 if __name__ == '__main__':

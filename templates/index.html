@@ -2,29 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flask Flash Demo</title>
+    <title>DevOps Assessment</title>
 </head>
 <body>
-
-    {# This block will display flashed messages #}
+    <h1>Flask App Deployed!</h1>
+    
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <ul class=flashes>
+        <ul style="color: green;">
         {% for category, message in messages %}
-          <li class="{{ category }}">{{ message }}</li>
+          <li>{{ message }}</li>
         {% endfor %}
         </ul>
       {% endif %}
     {% endwith %}
 
-    <h1>User Page</h1>
-    <hr>
-    
-    <p>Enter a name to see the flash message:</p>
     <form action="" method="POST">
-        <input type="text" name="new_name" placeholder="Enter a name" required>
+        <input type="text" name="name" placeholder="Enter your name" required>
         <button type="submit">Submit</button>
     </form>
-
 </body>
-</html>>
+</html>

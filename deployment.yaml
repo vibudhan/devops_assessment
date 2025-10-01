@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
       - name: flask-app
-        # This MUST EXACTLY MATCH the tag in deploy.yml
         image: vibu712/my-flask-app:latest
         ports:
         - containerPort: 5000
